@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: Petyo
-Build-Jdk: 1.8.0_111
+Built-By: I312934
+Build-Jdk: 1.8.0_112
 Created-By: Maven Integration for Eclipse
 
