@@ -31,7 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	// looks for a session and do we have assigned local to current session
-	@Bean//(name="localeResolver")
+	@Bean(name="localeResolver")
 	public LocaleResolver localResolver() {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
 		resolver.setDefaultLocale(Locale.ENGLISH);
