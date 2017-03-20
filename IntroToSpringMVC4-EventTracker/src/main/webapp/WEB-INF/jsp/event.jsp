@@ -27,7 +27,7 @@
 		<form:input path="name" cssClass="error"/>
 		<form:errors path="name" cssClass="error"/>
 		<br>
-		<input type="submit" class="btn" value="Enter Evenet"/>
+		<input type="submit" class="btn" value="Enter Event"/>
 	</form:form>
 </body>
 </html>
