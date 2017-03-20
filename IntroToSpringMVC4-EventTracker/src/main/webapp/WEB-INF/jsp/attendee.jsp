@@ -9,13 +9,13 @@
 	<title>Attendee Page</title>
 	<style>
 		.error {
-			color: #ff0000
+			color: #ff0000;
 		}
 		
 		.errorblock {
 			color: #000;
-			background-color: #ffEEEE
-			border: 1px solid #ff0000
+			background-color: #ffEEEE;
+			border: 1px solid #ff0000;
 			padding: 8px;
 			margin: 16px; 
 		}
@@ -31,6 +31,7 @@
 		<label for="textInput1"><spring:message code="attendee.name"/></label>
 		<form:input path="name" cssClass="error"/>
 		<form:errors path="name" cssClass="error"/>
+		<br>
 		<label for="textInput2"><spring:message code="attendee.emailAddress"/></label>
 		<form:input path="emailAddress" cssClass="error"/>
 		<form:errors path="emailAddress" cssClass="error"/>
