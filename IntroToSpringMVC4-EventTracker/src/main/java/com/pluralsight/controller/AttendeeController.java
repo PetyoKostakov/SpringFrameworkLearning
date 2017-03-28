@@ -62,15 +62,15 @@ public class AttendeeController {
         }
         return new ResponseEntity<List<Attendee>>(attendees, HttpStatus.OK);
     }
-	 
+	/* 
 	@RequestMapping(value = "/api/attendee/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createAttendee(@RequestBody Attendee attendee, UriComponentsBuilder ucBuilder) {
 		System.out.println("/api/attendee/ - POST");
 
-		/*if (userService.isUserExist(user)) {
+		if (userService.isUserExist(user)) {
 			System.out.println("A User with name " + user.getName() + " already exist");
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}*/
+		}
 
 		attendeeService.save(attendee);
 
@@ -78,8 +78,8 @@ public class AttendeeController {
 		headers.setLocation(ucBuilder.path("/attendee/{id}").buildAndExpand(attendee.getId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
+	*/
 	
-	/*
 	@RequestMapping(value = "/api/attendee/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Attendee> getUser(@PathVariable("id") long id) {
         System.out.println("Fetching User with id " + id);
@@ -90,5 +90,4 @@ public class AttendeeController {
         }
         return new ResponseEntity<Attendee>(attendee, HttpStatus.OK);
     }
-    */
 }

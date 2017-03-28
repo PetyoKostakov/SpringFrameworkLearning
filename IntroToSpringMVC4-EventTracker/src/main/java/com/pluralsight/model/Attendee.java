@@ -3,6 +3,7 @@ package com.pluralsight.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -13,6 +14,10 @@ import com.pluralsight.view.Phone;
 //@Table(name="ATTENDEE")
 @Entity
 public class Attendee {
+
+	
+	@ManyToOne
+	private Event event;
 	
 	@Id
 	@GeneratedValue
@@ -21,11 +26,10 @@ public class Attendee {
 	//@Column(name="NAME")
 	@Size(min=2, max=30) 
 	private String name;
-	
 	@Email
 	private String emailAddress;
 	//private Event event;
-	
+
 	@NotEmpty
 	@Phone
 	private String phone;
@@ -33,6 +37,11 @@ public class Attendee {
 	public String getEmailAddress() {
 		return emailAddress;
 	}
+	
+	public Event getEvent() {
+		return event;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +53,9 @@ public class Attendee {
 	}
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 	public void setId(Long id) {
 		this.id = id;
