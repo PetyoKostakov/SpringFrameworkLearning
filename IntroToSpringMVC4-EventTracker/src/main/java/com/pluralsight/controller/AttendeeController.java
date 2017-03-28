@@ -1,13 +1,22 @@
 package com.pluralsight.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.pluralsight.model.Attendee;
 import com.pluralsight.service.AttendeeService;
@@ -16,7 +25,7 @@ import com.pluralsight.service.AttendeeService;
 public class AttendeeController {
 	
 	@Autowired
-	private AttendeeService goalService;
+	private AttendeeService attendeeService;
 	
 	@RequestMapping(value="/attendee", method=RequestMethod.GET)
 	public String displayAttendeePage(Model model) {
@@ -37,9 +46,49 @@ public class AttendeeController {
 		if (result.hasErrors()) {
 			return "attendee";
 		} else {
-			goalService.save(attendee);
+			attendeeService.save(attendee);
 		}
 		
 		return "redirect:index.html";
 	}
+	
+	/* REST SERVICES*/
+	
+	 @RequestMapping(value = "/api/attendee", method = RequestMethod.GET)
+    public ResponseEntity<List<Attendee>> listAllAttendees() {
+        List<Attendee> attendees = attendeeService.getAll();
+        if(attendees.isEmpty()){
+            return new ResponseEntity<List<Attendee>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Attendee>>(attendees, HttpStatus.OK);
+    }
+	 
+	@RequestMapping(value = "/api/attendee/", method = RequestMethod.POST)
+	public ResponseEntity<Void> createAttendee(@RequestBody Attendee attendee, UriComponentsBuilder ucBuilder) {
+		System.out.println("/api/attendee/ - POST");
+
+		/*if (userService.isUserExist(user)) {
+			System.out.println("A User with name " + user.getName() + " already exist");
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}*/
+
+		attendeeService.save(attendee);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("/attendee/{id}").buildAndExpand(attendee.getId()).toUri());
+		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+	}
+	
+	/*
+	@RequestMapping(value = "/api/attendee/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Attendee> getUser(@PathVariable("id") long id) {
+        System.out.println("Fetching User with id " + id);
+        Attendee attendee = attendeeService.getAttendee(id);
+        if (attendee == null) {
+            System.out.println("Attendee with id " + id + " not found");
+            return new ResponseEntity<Attendee>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Attendee>(attendee, HttpStatus.OK);
+    }
+    */
 }
