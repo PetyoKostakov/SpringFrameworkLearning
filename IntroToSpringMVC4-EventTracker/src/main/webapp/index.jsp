@@ -11,6 +11,10 @@
 	
 	<a href="event.html">Add Event</a>
 	<br>
+	<a href="eventList.html">Event List</a>
+	<br>
 	<a href="attendee.html">Add Attendee</a>
+	<br>
+	<a href="attendeeList.html">Attendee List</a>
 </body>
 </html>

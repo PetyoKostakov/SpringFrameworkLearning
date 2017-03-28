@@ -2,18 +2,22 @@ package com.pluralsight.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.pluralsight.model.Attendee;
 import com.pluralsight.model.Event;
 import com.pluralsight.service.EventService;
 
@@ -35,12 +39,27 @@ public class EventController {
 		return "event";
 	}
 	
+	@RequestMapping(value="/eventList", method=RequestMethod.GET)
+	public String displayEventListPage(Model model) {
+		System.out.println("/eventList");
+		List<Event> events = eventService.getAll();
+		
+		model.addAttribute("events", events);
+		
+		return "eventList";
+	}
+	
 	@RequestMapping(value="/event", method=RequestMethod.POST)
-	public String processEvent(@ModelAttribute("event") Event event) {
-		System.out.println(event);
+	public String processAttendee(@Valid Event event, BindingResult result, Model m) {
+		System.out.println("/event - POST");
+		
+		if (result.hasErrors()) {
+			return "event";
+		} else {
+			eventService.save(event);
+		}
 		
 		return "redirect:index.html";
-		//return "event";
 	}
 	
 	/* REST SERVICES*/

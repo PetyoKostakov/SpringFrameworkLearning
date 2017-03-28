@@ -38,6 +38,15 @@ public class AttendeeController {
 		return "attendee";
 	}
 	
+	@RequestMapping(value="/attendeeList", method=RequestMethod.GET)
+	public String displayAttendeeLostPage(Model model) {
+		List<Attendee> attendees = attendeeService.getAll();
+		
+		model.addAttribute("attendees", attendees);
+		
+		return "attendeeList";
+	}
+	
 	@RequestMapping(value="/attendee", method=RequestMethod.POST)
 	public String processAttendee(@Valid Attendee attendee, BindingResult result, Model m) {
 	//public String processAttendee(@ModelAttribute("attendee") Attendee attendee) {
@@ -54,7 +63,7 @@ public class AttendeeController {
 	
 	/* REST SERVICES*/
 	
-	 @RequestMapping(value = "/api/attendee", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/attendee", method = RequestMethod.GET)
     public ResponseEntity<List<Attendee>> listAllAttendees() {
         List<Attendee> attendees = attendeeService.getAll();
         if(attendees.isEmpty()){
