@@ -19,7 +19,7 @@ public class Event {
 	@GeneratedValue
 	private Long id;
 	
-	@OneToMany(mappedBy="event", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="event", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JsonManagedReference // stackoverflow exeption http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
 	private List<Attendee> attendees = new ArrayList<Attendee>();
 	private String name;

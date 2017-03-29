@@ -17,12 +17,27 @@ table, th, td {
 <body>
 	<table>
 		<tr>
-			<th>id</th><th>name</th>
+			<th>id</th><th>name</th><th>attendees</th>
 		</tr>
 		<c:forEach var="event" items="${events}">
 			<tr>
 				<td>${event.id}</td>
 				<td>${event.name}</td>
+				<td>
+					<table>
+						<tr>
+							<th>id</th><th>name</th><th>mail</th><th>phone</th>
+						</tr>
+						<c:forEach var="attendee" items="${event.attendees}">
+							<tr>
+								<td>${attendee.id}</td>
+								<td>${attendee.name}</td>
+								<td>${attendee.emailAddress}</td>
+								<td>${attendee.phone}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
