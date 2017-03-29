@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pluralsight.model.Event;
 
-@Repository("aeventRepository")
+@Repository("aventRepository")
 public class EventRepositoryImpl implements EventRepository {
 
 	@PersistenceContext

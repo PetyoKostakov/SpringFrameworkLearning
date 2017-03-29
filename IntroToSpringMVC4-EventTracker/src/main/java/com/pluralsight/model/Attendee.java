@@ -1,5 +1,8 @@
 package com.pluralsight.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,6 +12,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pluralsight.view.Phone;
 
 //@Table(name="ATTENDEE")
@@ -16,7 +20,8 @@ import com.pluralsight.view.Phone;
 public class Attendee {
 
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JsonBackReference // stackoverflow exeption http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
 	private Event event;
 	
 	@Id

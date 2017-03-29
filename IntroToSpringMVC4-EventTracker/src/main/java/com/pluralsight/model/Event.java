@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Event {
@@ -15,7 +18,9 @@ public class Event {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@OneToMany(mappedBy="event", cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="event", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JsonManagedReference // stackoverflow exeption http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
 	private List<Attendee> attendees = new ArrayList<Attendee>();
 	private String name;
 
@@ -29,6 +34,10 @@ public class Event {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void addAttende(Attendee attendee) {
+		this.attendees.add(attendee);
 	}
 
 	public void setAttendees(List<Attendee> attendees) {
