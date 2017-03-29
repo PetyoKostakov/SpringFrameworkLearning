@@ -11,14 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.pluralsight.model.Attendee;
 import com.pluralsight.model.Event;
+import com.pluralsight.model.EventReport;
 import com.pluralsight.service.EventService;
 
 @Controller
@@ -27,6 +26,8 @@ public class EventController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	/* PAGES */
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET)
 	public String displayEventPage(Model model) {
@@ -60,6 +61,16 @@ public class EventController {
 		}
 		
 		return "redirect:index.html";
+	}
+	
+	@RequestMapping(value="/eventReport", method=RequestMethod.GET)
+	public String processEventReport(Model model) {
+		System.out.println("/eventReport - GET");
+		
+		List<EventReport> eventReports = eventService.getAllEventReports();
+		model.addAttribute("eventReports", eventReports);
+		
+		return "eventReport";
 	}
 	
 	/* REST SERVICES*/

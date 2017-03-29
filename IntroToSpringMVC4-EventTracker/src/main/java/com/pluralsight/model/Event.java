@@ -8,12 +8,22 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name=Event.FIND_EVENT_REPORTS, query="Select new com.pluralsight.model.EventReport(g.name, e.id)" + 
+									"from Event g, Attendee e where g.id = e.event.id"),
+	@NamedQuery(name=Event.FIND_ALL_EVENTS, query="SELECT e FROM Event e")
+})
 public class Event {
+	
+	public static final String FIND_EVENT_REPORTS = "findEventReports";
+	public static final String FIND_ALL_EVENTS = "findAllEvents";
 	
 	@Id
 	@GeneratedValue

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pluralsight.model.Event;
+import com.pluralsight.model.EventReport;
 import com.pluralsight.repository.EventRepository;
 
 @Service("eventService")
@@ -26,5 +27,10 @@ public class EventServiceImpl implements EventService {
 	
 	public Event getEvent(Long id) {
 		return eventRepo.getEvent(id);
+	}
+
+	@Override
+	public List<EventReport> getAllEventReports() {
+		return eventRepo.getAllEventReports();
 	}
 }
