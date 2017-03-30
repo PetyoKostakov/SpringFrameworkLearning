@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -22,7 +21,13 @@ public class EventRepositoryImpl implements EventRepository {
 	@Override
 	@Transactional
 	public Event save(Event event) {
-		em.persist(event);
+		if (event.getId() == null) {
+			em.persist(event);
+			em.flush();
+		} else {
+			em.merge(event);
+		}
+		
 		return event;
 	}
 

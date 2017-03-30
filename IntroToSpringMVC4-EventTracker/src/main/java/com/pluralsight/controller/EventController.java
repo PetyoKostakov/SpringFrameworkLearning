@@ -2,6 +2,7 @@ package com.pluralsight.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,14 @@ public class EventController {
 	/* PAGES */
 	
 	@RequestMapping(value="/event", method=RequestMethod.GET)
-	public String displayEventPage(Model model) {
+	public String displayEventPage(Model model, HttpSession session) {
 		System.out.println("/event");
-		Event event = new Event();
+		Event event = (Event)session.getAttribute("event");
 		
-		event.setName("Java User group");
+		if (event == null ) {
+			event = new Event();
+		}
+		
 		model.addAttribute("event", event);
 		
 		return "event";
