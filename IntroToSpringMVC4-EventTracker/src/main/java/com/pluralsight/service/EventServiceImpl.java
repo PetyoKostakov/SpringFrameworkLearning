@@ -22,11 +22,11 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> getAll() {
-		return eventRepo.getAll();
+		return eventRepo.findAll();
 	}
 	
 	public Event getEvent(Long id) {
-		return eventRepo.getEvent(id);
+		return eventRepo.findOne(id);
 	}
 
 	@Override

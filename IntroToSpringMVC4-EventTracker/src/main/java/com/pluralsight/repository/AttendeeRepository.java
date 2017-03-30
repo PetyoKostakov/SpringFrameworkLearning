@@ -2,11 +2,14 @@ package com.pluralsight.repository;
 
 import java.util.List;
 
-import com.pluralsight.model.Attendee;
-import com.pluralsight.model.EventReport;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AttendeeRepository {
-	Attendee save(Attendee attendee);
+import com.pluralsight.model.Attendee;
+
+@Repository("attendeeRepository")
+public interface AttendeeRepository extends JpaRepository<Attendee, Long>{
+	/*Attendee save(Attendee attendee);
 	List<Attendee> getAll();
-	Attendee getAttendee(Long id);
+	Attendee getAttendee(Long id);*/
 }

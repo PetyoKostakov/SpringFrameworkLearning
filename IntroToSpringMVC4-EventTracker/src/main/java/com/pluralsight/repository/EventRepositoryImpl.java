@@ -7,18 +7,16 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-import org.springframework.stereotype.Repository;
-
 import com.pluralsight.model.Event;
 import com.pluralsight.model.EventReport;
 
-@Repository("aventRepository")
-public class EventRepositoryImpl implements EventRepository {
+//@Repository("aventRepository")
+public class EventRepositoryImpl /*implements EventRepository*/ {
 
 	@PersistenceContext
 	private EntityManager em;
 	
-	@Override
+	//@Override
 	@Transactional
 	public Event save(Event event) {
 		if (event.getId() == null) {
@@ -31,7 +29,7 @@ public class EventRepositoryImpl implements EventRepository {
 		return event;
 	}
 
-	@Override
+	//@Override
 	public List<Event> getAll() {
 		//Query query = em.createQuery("SELECT e FROM Event e");
 		TypedQuery<Event> query = em.createNamedQuery(Event.FIND_ALL_EVENTS, Event.class);
@@ -44,7 +42,7 @@ public class EventRepositoryImpl implements EventRepository {
 	}
 	
 
-	@Override
+	//@Override
 	public List<EventReport> getAllEventReports() {
 		//Query query = em.createQuery("Select new com.pluralsight.model.EventReport(g.name, e.id)" + 
 		//							"from Event g, Attendee e where g.id = e.event.id");

@@ -21,11 +21,11 @@ public class AttendeeServiceImpl implements AttendeeService {
 
 	@Override
 	public List<Attendee> getAll() {
-		return attendeeRepo.getAll();
+		return attendeeRepo.findAll();
 	}
 	
 	public Attendee getAttendee(Long id) {
-		return attendeeRepo.getAttendee(id);
+		return attendeeRepo.findOne(id);
 	}
 
 }

@@ -12,13 +12,12 @@ import org.springframework.stereotype.Repository;
 import com.pluralsight.model.Attendee;
 import com.pluralsight.model.EventReport;
 
-@Repository("attendeeRepository")
-public class AttendeeRepositoryImpl implements AttendeeRepository {
+//@Repository("attendeeRepository")
+public class AttendeeRepositoryImpl /*implements AttendeeRepository */{
 
 	@PersistenceContext
 	private EntityManager em;
 
-	@Override
 	@Transactional
 	public Attendee save(Attendee attendee) {
 		em.persist(attendee);
@@ -26,7 +25,6 @@ public class AttendeeRepositoryImpl implements AttendeeRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Attendee> getAll() {
 		Query query = em.createQuery("SELECT e FROM Attendee e");
 		return (List<Attendee>) query.getResultList();
